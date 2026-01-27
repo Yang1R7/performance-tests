@@ -1,0 +1,9 @@
+# Python-специфичные файлы
+*.pyc
+__pycache__/
+.venv/
+venv/
+# macOS специфичные файлы
+.DS_Store
+# IDE (Pycharm) специфичные файлы
+.idea/
