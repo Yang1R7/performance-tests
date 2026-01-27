@@ -7,3 +7,5 @@ venv/
 .DS_Store
 # IDE (Pycharm) специфичные файлы
 .idea/
+# JetBrains IDEs project files
+*.iml
