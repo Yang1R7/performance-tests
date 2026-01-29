@@ -41,7 +41,7 @@ class IssueVirtualCardRequestSchema(BaseModel):
     """
     Структура данных для выпуска виртуальной карты.
     """
-    model_config = ConfigDict(validate_by_alias=True)
+    model_config = ConfigDict(populate_by_name=True)
 
     user_id: str = Field(alias="userId")
     account_id: str = Field(alias="accountId")
@@ -58,7 +58,7 @@ class IssuePhysicalCardRequestSchema(BaseModel):
     """
     Структура данных для выпуска физической карты.
     """
-    model_config = ConfigDict(validate_by_alias=True)
+    model_config = ConfigDict(populate_by_name=True)
 
     user_id: str = Field(alias="userId")
     account_id: str = Field(alias="accountId")

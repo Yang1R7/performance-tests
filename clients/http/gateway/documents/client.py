@@ -3,7 +3,7 @@ from httpx import Response
 
 from clients.http.client import HTTPClient
 from clients.http.gateway.client import build_gateway_http_client
-from clients.http.gateway.documents.schema import GetTariffDocumentResponseSchema
+from clients.http.gateway.documents.schema import GetTariffDocumentResponseSchema, GetContractDocumentResponseSchema
 
 
 class DocumentsGatewayHTTPClient(HTTPClient):
@@ -39,7 +39,7 @@ class DocumentsGatewayHTTPClient(HTTPClient):
         response = self.get_tariff_document_api(account_id)
         return GetTariffDocumentResponseSchema.model_validate_json(response.text)
 
-    def get_contract_document(self, account_id: str) -> GetTariffDocumentResponseSchema:
+    def get_contract_document(self, account_id: str) -> GetContractDocumentResponseSchema:
         """
         Получает документ контракта для указанного идентификатора счета и парсит его в словарь.
 
@@ -47,7 +47,7 @@ class DocumentsGatewayHTTPClient(HTTPClient):
         :return: Словарь с данными документа контракта.
         """
         response = self.get_contract_document_api(account_id)
-        return GetTariffDocumentResponseSchema.model_validate_json(response.text)
+        return GetContractDocumentResponseSchema.model_validate_json(response.text)
 
 
 def build_documents_gateway_http_client() -> DocumentsGatewayHTTPClient:

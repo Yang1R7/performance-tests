@@ -171,8 +171,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции комиссии.
         """
         request = MakeFeeOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )
@@ -188,8 +186,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции пополнения.
         """
         request = MakeTopUpOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )
@@ -205,8 +201,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции кэшбэка.
         """
         request = MakeCashbackOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )
@@ -222,8 +216,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции перевода.
         """
         request = MakeTransferOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )
@@ -239,11 +231,8 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции покупки.
         """
         request = MakePurchaseOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
-            accountId=account_id,
-            category="Taxi"
+            accountId=account_id
         )
         response = self.make_purchase_operation_api(request)
         return MakePurchaseOperationResponseSchema.model_validate_json(response.text)
@@ -257,8 +246,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции оплаты по счету.
         """
         request = MakeBillPaymentOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )
@@ -275,8 +262,6 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :return: Словарь с информацией о созданной операции снятия наличных.
         """
         request = MakeCashWithdrawalOperationRequestSchema(
-            status=OperationStatus.COMPLETED,
-            amount=1000,
             cardId=card_id,
             accountId=account_id
         )

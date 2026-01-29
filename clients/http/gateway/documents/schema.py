@@ -13,7 +13,7 @@ class GetTariffDocumentResponseSchema(BaseModel):
     """
     Представляет структуру ответа при получении тарифного документа.
     """
-    contract: ContractSchema
+    tariff: ContractSchema
 
 
 class GetContractDocumentResponseSchema(BaseModel):

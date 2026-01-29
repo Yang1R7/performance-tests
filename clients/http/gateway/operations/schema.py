@@ -1,6 +1,7 @@
 from enum import StrEnum
 
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
+from tools.fakers import fake
 
 
 class OperationStatus(StrEnum):
@@ -24,11 +25,11 @@ class OperationSchema(BaseModel):
     """
     TypedDict для представления структуры одной операции.
     """
-    model_config = ConfigDict(validate_by_alias=True)
+    model_config = ConfigDict(populate_by_name=True)
     id: str
     type: OperationType
     status: OperationStatus
-    amount: int
+    amount: float
     cardId: str = Field(alias='cardId')
     category: str
     createdAt: str = Field(alias='createdAt')
@@ -47,7 +48,7 @@ class OperationsSummarySchema(BaseModel):
     """
     TypedDict для представления структуры сводки операций.
     """
-    model_config = ConfigDict(validate_by_alias=True)
+    model_config = ConfigDict(populate_by_name=True)
     spentAmount: int = Field(alias='spentAmount')
     receivedAmount: int = Field(alias='receivedAmount')
     cashbackAmount: int = Field(alias='cashbackAmount')
@@ -148,9 +149,9 @@ class MakeOperationRequestSchema(BaseModel):
     """
     Базовый TypedDict для запросов на создание операции.
     """
-    model_config = ConfigDict(validate_by_alias=True)
-    status: OperationStatus
-    amount: float
+    model_config = ConfigDict(populate_by_name=True)
+    status: OperationStatus = Field(default_factory=lambda: fake.enum(OperationStatus))
+    amount: float = Field(default_factory=fake.amount)
     cardId: str = Field(alias='cardId')
     accountId: str = Field(alias='accountId')
 
@@ -159,7 +160,7 @@ class MakePurchaseOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции покупки.
     """
-    category: str
+    category: str = Field(default_factory=fake.category)
 
 
 class MakeFeeOperationRequestSchema(MakeOperationRequestSchema):
