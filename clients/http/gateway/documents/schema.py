@@ -1,5 +1,6 @@
-
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
+
+
 class ContractSchema(BaseModel):
     """
     Представляет структуру контракта с URL и содержимым документа.
