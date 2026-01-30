@@ -5,20 +5,20 @@ from tools.fakers import fake
 
 
 class OperationStatus(StrEnum):
-    FAILED = "FAILED",
-    COMPLETED = "COMPLETED",
+    FAILED = "FAILED"
+    COMPLETED = "COMPLETED"
     IN_PROGRESS = "IN_PROGRESS"
     UNSPECIFIED = "UNSPECIFIED"
 
 
 class OperationType(StrEnum):
-    FEE = "FEE",
-    TOP_UP = "TOP_UP",
-    PURCHASE = "PURCHASE",
-    CASHBACK = "CASHBACK",
-    TRANSFER = "TRANSFER",
-    BILL_PAYMENT = "BILL_PAYMENT",
-    CASH_WITHDRAWAL = "CASH_WITHDRAWAL",
+    FEE = "FEE"
+    TOP_UP = "TOP_UP"
+    PURCHASE = "PURCHASE"
+    CASHBACK = "CASHBACK"
+    TRANSFER = "TRANSFER"
+    BILL_PAYMENT = "BILL_PAYMENT"
+    CASH_WITHDRAWAL = "CASH_WITHDRAWAL"
 
 
 class OperationSchema(BaseModel):
@@ -135,14 +135,15 @@ class GetOperationsSummaryQuerySchema(BaseModel):
     """
     TypedDict для параметров запроса сводки операций.
     """
-    accountId: str
-
+    model_config = ConfigDict(populate_by_name=True)
+    account_id: str = Field(alias='accountId')
 
 class GetOperationsQueryParamsSchema(BaseModel):
     """
     TypedDict для параметров запроса списка операций.
     """
-    accountId: str
+    model_config = ConfigDict(populate_by_name=True)
+    account_id: str = Field(alias='accountId')
 
 
 class MakeOperationRequestSchema(BaseModel):
@@ -160,6 +161,7 @@ class MakePurchaseOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции покупки.
     """
+    model_config = ConfigDict(populate_by_name=True)
     category: str = Field(default_factory=fake.category)
 
 
@@ -167,39 +169,38 @@ class MakeFeeOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции комиссии.
     """
-    pass
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class MakeTopUpOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции пополнения.
     """
-    pass
-
+    model_config = ConfigDict(populate_by_name=True)
 
 class MakeCashbackOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции кэшбэка.
     """
-    pass
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class MakeTransferOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции перевода.
     """
-    pass
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class MakeBillPaymentOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции оплаты счетов.
     """
-    pass
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class MakeCashWithdrawalOperationRequestSchema(MakeOperationRequestSchema):
     """
     TypedDict для запроса на создание операции снятия наличных.
     """
-    pass
+    model_config = ConfigDict(populate_by_name=True)
