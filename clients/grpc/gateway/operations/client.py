@@ -1,7 +1,6 @@
 from grpc import Channel
 
-from clients.grpc.client import GRPCClient
-from clients.http.gateway.operations.schema import OperationStatus
+from clients.grpc.client import GRPCClient, build_gateway_grpc_client
 from contracts.services.gateway.operations.operations_gateway_service_pb2_grpc import OperationsGatewayServiceStub
 from contracts.services.gateway.operations.rpc_get_operation_pb2 import GetOperationResponse, GetOperationRequest
 from contracts.services.gateway.operations.rpc_get_operation_receipt_pb2 import GetOperationReceiptResponse, GetOperationReceiptRequest
@@ -15,6 +14,7 @@ from contracts.services.gateway.operations.rpc_make_fee_operation_pb2 import Mak
 from contracts.services.gateway.operations.rpc_make_purchase_operation_pb2 import MakePurchaseOperationResponse, MakePurchaseOperationRequest
 from contracts.services.gateway.operations.rpc_make_top_up_operation_pb2 import MakeTopUpOperationResponse, MakeTopUpOperationRequest
 from contracts.services.gateway.operations.rpc_make_transfer_operation_pb2 import MakeTransferOperationResponse, MakeTransferOperationRequest
+from contracts.services.operations.operation_pb2 import OperationStatus
 from tools.fakers import fake
 
 
@@ -285,3 +285,11 @@ class OperationsGatewayGRPCClient(GRPCClient):
             amount=fake.amount()
         )
         return self.make_cash_withdrawal_operation_api(request)
+
+def build_operations_gateway_grpc_client() -> OperationsGatewayGRPCClient:
+    """
+    Фабрика для создания экземпляра OperationsGatewayGRPCClient.
+
+    :return: Инициализированный клиент для OperationsGatewayGRPCClient.
+    """
+    return OperationsGatewayGRPCClient(channel=build_gateway_grpc_client())
