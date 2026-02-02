@@ -1,8 +1,9 @@
-from locust import User, between, task
+from locust import task
 
 from clients.http.gateway.accounts.schema import OpenDepositAccountResponseSchema
 from clients.http.gateway.locust import GatewayHTTPSequentialTaskSet
 from clients.http.gateway.users.schema import CreateUserResponseSchema
+from tools.locust.user import LocustBaseUser
 
 
 class GetAccountsTaskSet(GatewayHTTPSequentialTaskSet):
@@ -18,7 +19,8 @@ class GetAccountsTaskSet(GatewayHTTPSequentialTaskSet):
         if not self.create_user_response:
             return  # Если пользователь не был создан, нет смысла продолжать
 
-        self.open_deposit_account_response = self.accounts_gateway_client.open_deposit_account(user_id=self.create_user_response.user.id)
+        self.open_deposit_account_response = self.accounts_gateway_client.open_deposit_account(
+            user_id=self.create_user_response.user.id)
 
     @task(6)
     def get_accounts(self):
@@ -28,7 +30,5 @@ class GetAccountsTaskSet(GatewayHTTPSequentialTaskSet):
         self.accounts_gateway_client.get_accounts(user_id=self.create_user_response.user.id)
 
 
-class GetAccountsScenarioUser(User):
-    host = "localhost"
+class GetAccountsScenarioUser(LocustBaseUser):
     tasks = [GetAccountsTaskSet]
-    wait_time = between(1, 3)  # Имитируем паузы между выполнением сценариев
