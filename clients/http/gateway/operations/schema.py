@@ -49,7 +49,7 @@ class OperationsSummarySchema(BaseModel):
     TypedDict для представления структуры сводки операций.
     """
     model_config = ConfigDict(populate_by_name=True)
-    spentAmount: int = Field(alias='spentAmount')
+    spentAmount: float = Field(alias='spentAmount')
     receivedAmount: float = Field(alias='receivedAmount')
     cashbackAmount: int = Field(alias='cashbackAmount')
 
