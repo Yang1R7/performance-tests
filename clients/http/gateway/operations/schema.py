@@ -50,7 +50,7 @@ class OperationsSummarySchema(BaseModel):
     """
     model_config = ConfigDict(populate_by_name=True)
     spentAmount: int = Field(alias='spentAmount')
-    receivedAmount: int = Field(alias='receivedAmount')
+    receivedAmount: float = Field(alias='receivedAmount')
     cashbackAmount: int = Field(alias='cashbackAmount')
 
 
