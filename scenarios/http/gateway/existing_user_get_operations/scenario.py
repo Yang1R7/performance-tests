@@ -48,5 +48,5 @@ class GetOperationsTaskSet(GatewayHTTPTaskSet):
 
 
 # Пользовательский класс, который будет запускать наш TaskSet
-class MakePurchaseOperationScenarioUser(LocustBaseUser):
+class GetOperationsScenarioUser(LocustBaseUser):
     tasks = [GetOperationsTaskSet]
