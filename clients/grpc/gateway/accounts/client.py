@@ -80,7 +80,6 @@ class AccountsGatewayGRPCClient(GRPCClient):
         Низкоуровневый вызов метода OpenCreditCardAccount через gRPC.
 
         :param request: gRPC-запрос с ID пользователя.
-        :return: Ответ от сервиса с данными открытого кредитного счета.
         """
         return self.stub.OpenCreditCardAccount(request)
 
