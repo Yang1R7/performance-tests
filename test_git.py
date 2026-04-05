@@ -3,4 +3,4 @@
 
 print("Hello")
 
-print("Hello")
+print("Version from MAIN")
